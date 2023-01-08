@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+    <title>Chat App</title>
+  </head>
+  <body>
+   
+    <style>
+      .imged{
+         height: 230px;
+ object-fit:fill !important;
+ width: 300px;
+      }
+
+      .cb{
+         height: 220px;
+      }
+
+      .img-circle{
+         width: 60px;
+         height: 60px;
+      }
+
+      .ai_img{
+         border-radius: 50%;
+      }
+
+
+
+/*/////////////////////////////////*/
+/*/////////  chat styles  /////////*/
+/*/////////////////////////////////*/
+.chat
+{
+list-style: none;
+margin: 0;
+padding: 0;
+}
+
+.chat li
+{
+margin-bottom: 40px;
+padding-bottom: 5px;
+/* border-bottom: 1px dotted #B3A9A9; */
+margin-top: 10px;
+width: 80%;
+}
+
+
+.chat li .chat-body p
+{
+margin: 0;
+/* color: #777777; */
+}
+
+
+.chat-care
+{
+overflow-y: scroll;
+height: 500px;
+}
+.chat-care .chat-img
+{
+width: 50px;
+height: 50px;
+}
+.chat-care .img-circle
+{
+border-radius: 50%;
+}
+.chat-care .chat-img
+{
+display: inline-block;
+}
+.chat-care .chat-body
+{
+display: inline-block;
+max-width: 80%;
+background-color: #FFC195;
+border-radius: 12.5px;
+padding: 15px;
+}
+.chat-care .chat-body strong
+{
+color: #0169DA;
+}
+
+.chat-care .admin
+{
+text-align: right ;
+float: right;
+}
+.chat-care .admin p
+{
+text-align: left ;
+}
+.chat-care .agent
+{
+text-align: left ;
+float: left;
+}
+.chat-care .left
+{
+float: left;
+}
+.chat-care .right
+{
+float: right;
+}
+
+.clearfix {
+clear: both;
+}
+
+
+
+
+::-webkit-scrollbar-track
+{
+box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar
+{
+width: 12px;
+background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+background-color: #555;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   </style>
+
+
+    <br>
+      <div class="container">
+        <div class="row">
+              <div class="col-md-6 mx-auto">
+                  <div class="card">
+                      <div class="card-header text-center">
+                          <span>AI Chat Bot</span>
+                      </div>
+                      <div class="card-body chat-care">
+                          <ul class="chat">
+                              
+                            <hr>
+
+                            
+
+        {% for message in chat_history %}
+        {% if message.user_input %}
+                              <li class="agent clearfix">
+
+                                  <span class="chat-img left clearfix mx-2">
+                                      <img src="data:image/png;base64,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" alt="Agent" class="img-circle" />
+                                  </span>
+                                  <div class="chat-body clearfix">
+                                      <div class="header clearfix">
+                                          <strong class="primary-font">{{message.user}} </strong> <small class="right text-muted mr-4">
+                                              <span class="glyphicon glyphicon-time"></span>{{ message.timestamp|timesince }} ago</small>
+                                      </div>
+                                      <p>
+                                        {{ message.user_input }}
+                                      </p>
+                                  </div>
+                              </li>
+
+        {% endif %}
+
+                              {% if message.ai_response %}
+                              <li class="admin clearfix">
+                                  <span class="chat-img right clearfix  mx-2">
+                                      <img src="https://cdn-icons-png.flaticon.com/512/1985/1985496.png" alt="Admin" class="img-circle ai_img" />
+                                  </span>
+                                  <div class="chat-body clearfix">
+                                      <div class="header clearfix">
+                                          <small class="left text-muted"><span class="glyphicon glyphicon-time"></span>{{ message.timestamp|timesince }} ago</small>
+                                          <strong class="right primary-font">AI</strong>
+                                      </div>
+                                      <p>
+                                          {{ message.ai_response }}
+                                      </p>
+                                  </div>
+                              </li>
+
+                              {% endif %}                            
+
+
+        {% endfor %}
+                          </ul>
+                      </div>
+                      <div class="card-footer">
+                        <form method="post">
+                            {% csrf_token %}
+                          <div class="input-group">
+                              <input id="btn-input" type="text" name="user_input" class="form-control input-sm" placeholder="Type your message here..." />
+                              
+                              <span class="input-group-btn">
+                                
+                                  <button class="btn btn-primary" id="btn-chat" type='submit'>
+                                      Send</button>
+                              </span>
+                          </div>
+                        </form>
+                        <div class="row justify-content-center">
+                          <a class="btn btn-info mt-3 mr-2" id="btn-chat" href="{% url 'clear' %}">Clear Chat</a>
+                        <a class="btn btn-danger mt-3" id="btn-chat" href="{% url 'logout' %}">
+                          Logout </a>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+
+
+
+
+
+
+   
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.16.0/dist/umd/popper.min.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+        </body>
+        </html> 
