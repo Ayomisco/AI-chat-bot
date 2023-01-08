@@ -6,10 +6,10 @@ from .forms import SignUpForm
 from django.contrib.auth.decorators import login_required
 import openai
 from django.contrib.auth.models import User
+from decouple import config
+# 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
 
-
-# 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
-openai.api_key = "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"
+openai.api_key = SECRET_KEY = config('OPENAI_KEY')
 
 
 
